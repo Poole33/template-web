@@ -1,0 +1,40 @@
+/* @import './base.css'; */
+@import './theme.css';
+@import './antdv-custom.css';
+@import './business.scss';
+
+html, body {
+    font-family: sans-serif;
+    background: var(--theme-background);
+    color: var(--theme-color);
+}
+
+.bg-fir {
+    background-color: var(--theme-background);
+}
+
+.bg-sec {
+    background-color: var(--theme-bgSecondary);
+}
+
+.bg-thir {
+    background-color: var(--theme-bgTertiary);
+}
+
+.border-color {
+    border-color: #dc3417;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #686868;
+}
+
+::-webkit-scrollbar-track {
+    /* background-color: #000; */
+}

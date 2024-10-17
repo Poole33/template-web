@@ -1,0 +1,40 @@
+
+.ant-collapse {
+    border: none;
+    /* background-color: #2c2c2c; */
+    .ant-collapse-item, .ant-collapse-content {
+        border: none;
+    }
+}
+
+.ant-radio-button-wrapper-checked {
+    /* color: white; */
+    border-width: 2px;
+}
+
+.ant-btn-primary, .ant-input:focus {
+    box-shadow: none !important;
+}
+
+/* .ant-modal-close {
+    color: white !important;
+    &:hover {
+        color: #ffffff6b !important;
+    }
+} */
+
+.ant-tabs-nav::before {
+    border-bottom: none !important;
+}
+
+/* .ant-tabs-tab-active .ant-tabs-tab-btn, .ant-select-selection-item, .ant-select-item-empty, .ant-select-selection-placeholder, .ant-input::placeholder {
+    color: white !important;
+} */
+
+.ant-tag-checkable {
+    background-color: var(--theme-bgSecondary);
+}
+
+.ant-tag-checkable-checked {
+    background-color: var(--theme-primary);
+}

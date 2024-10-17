@@ -1,0 +1,14 @@
+
+.r-title {
+    font-size: 1.1em;
+    color: #a0a0a0;
+    width: 120px;
+}
+
+.img-hover:hover {
+    transform: scale(1.1);
+}
+
+.img-hover {
+    transition: all .2s;
+}
