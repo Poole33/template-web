@@ -28,6 +28,7 @@
                     v-else-if="item.children && item.children.length > 1"
                     :key="item.path"
                     :title="item.name"
+                    @titleClick="titleClick(item.path)"
                 >
                     <template #icon>
                         <a-tooltip placement="top" :title="item.name">
@@ -61,7 +62,7 @@ import { constRoutes } from '@/router/index.js'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-let openKeys = ref([]) // 展开哪个tab
+let openKeys = ref([localStorage.getItem('menu-openkey')]) // 展开哪个tab
 let selectedKeys = ref([route.path]) // 选中哪个item
 let collapsed = ref(false) // 折叠aside
 
@@ -80,6 +81,10 @@ function dynamicCollapsed() {
         magnify = true
         shrink = false
     }
+}
+
+function titleClick(openkey) {
+    localStorage.setItem('menu-openkey', openkey)
 }
 
 onMounted(() => {
