@@ -60,20 +60,20 @@
 </template>
 
 <script setup>
-import { message } from 'ant-design-vue';
+import { message } from 'ant-design-vue'
 import { ref } from 'vue'
 import { login } from '@/api/module/login.js'
 import { useRouter, useRoute } from 'vue-router'
-import Register from '@/components/Register.vue';
+import Register from '@/components/Register.vue'
 
 const router = useRouter()
 const route = useRoute()
 
 
 const formData = ref({
-  phone: '',
-  pwd: '',
-});
+    phone: '',
+    pwd: '',
+})
 
 async function onFinish(values) {
 	const res = await login(values)
@@ -114,7 +114,7 @@ if (key) {
 }
 
 .logo-text {
-    color: var(--theme-background);;
+    color: var(--theme-background);
 }
 
 

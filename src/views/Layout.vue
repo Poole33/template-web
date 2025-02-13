@@ -17,7 +17,7 @@ import Aside from '@/components/Aside.vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-console.log('router', useRoute());
+console.log('router', useRoute())
 </script>
 
 <style lang="scss" scoped>

@@ -70,7 +70,7 @@
 import router from '@/router'
 import { UserOutlined, ExclamationCircleOutlined, } from '@ant-design/icons-vue'
 import { message, Modal } from 'ant-design-vue'
-import { defineProps, ref, createVNode } from 'vue'
+import { ref, createVNode } from 'vue'
 import { useThemeStore } from '@/store/theme'
 
 defineProps({

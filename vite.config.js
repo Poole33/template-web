@@ -6,7 +6,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    esbuild:{
+    esbuild: {
         drop: ['console', 'debugger'],
     },
     plugins: [
@@ -17,12 +17,19 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: "modern-compiler" // or 'modern'
+            }
         }
     },
     server: {
         host: '0.0.0.0',
-        port: 6666,
+        port: 2333,
         proxy: {
             '/backend/api': {
                 target: 'http://10.10.24.127:8888',

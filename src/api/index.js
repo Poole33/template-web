@@ -1,7 +1,7 @@
-import axios from "axios"
+import axios from 'axios'
 // import qs from 'qs'
 import { message } from 'ant-design-vue'
-import router from "@/router"
+import router from '@/router'
 import { throttle } from 'lodash'
 const go_login = throttle(goLogin, 5000, { trailing: false })
 const show_error_msg = throttle(showErrorMsg, 5000, { trailing: false })
@@ -45,7 +45,7 @@ export default {
     },
     upload: (url, data) => {
         const formData = new FormData()
-            Object.keys(data).forEach((key) => {
+        Object.keys(data).forEach((key) => {
             formData.append(key, data[key])
         })
         return service.post(url, formData, { header: { 'Content-Type': 'multipart/form-data' } })
