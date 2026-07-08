@@ -15,63 +15,50 @@
             </div>
         </div>
         <div class="grow flex flex-justify-end items-center" v-if="!isHideRight">
-            <!-- <a-popover trigger="click">
-                <div class="bg-opacity-30 px-4 hover:bg-stone-700 h-full flex items-center text-xl text-white">
-                    <BellOutlined />
-                </div>
-
-                <template #content>
-                    <a-empty description="暂无数据" />
-                </template>
-            </a-popover> -->
 
             <!-- 主题切换 -->
-            <a-switch
-                v-model:checked="checked"
+            <t-switch
+                v-model:value="checked"
                 @change="changeTheme"
                 class="mr-3"
-                checkedValue="light"
-                unCheckedValue="dark"
+                :customValue="['light', 'dark']"
+                size="large"
+                :label="[() => createVNode(SunBoldIcon, {height: '1em'}), () => createVNode(MoonBoldIcon, {height: '1em'})]"
             >
-                <template #checkedChildren>
-                    <span class="iconfont icon-sun"></span>
-                </template>
-                <template #unCheckedChildren>
-                    <span class="iconfont icon-moon"></span>
-                </template>
-            </a-switch>
+            </t-switch>
 
             <!-- 我的-下拉 -->
-            <a-dropdown>
-                <a-button type="text" class="mine-btn">
+            <t-dropdown
+              trigger="click"
+            >
+                <t-button variant="text" class="mine-btn">
                     <template #icon>
-                        <UserOutlined />
+                        <UserBoldIcon height="1em" />
                     </template>
                     
                     {{ phone }}
-                </a-button>
+                </t-button>
 
-                <template #overlay>
-                  <a-menu>
-                    <a-menu-item>
-                        <a href="javascript:;" @click="toHome">返回首页</a>
-                    </a-menu-item>
-                    <a-menu-item>
-                        <a href="javascript:;" @click="logout">退出登录</a>
-                    </a-menu-item>
-                  </a-menu>
-                </template>
-            </a-dropdown>
+                  <t-dropdown-menu>
+                    <t-dropdown-item>
+                        <t-button variant="text" @click="toHome">返回首页</t-button>
+                    </t-dropdown-item>
+                    <t-dropdown-item>
+                        <t-button variant="text" @click="logout">退出登录</t-button>
+                    </t-dropdown-item>
+                  </t-dropdown-menu>
+            </t-dropdown>
         </div>
     </header>
 </template>
 
 <script setup>
 import router from '@/router'
-import { UserOutlined, ExclamationCircleOutlined, } from '@ant-design/icons-vue'
-import { message, Modal } from 'ant-design-vue'
 import { ref, createVNode } from 'vue'
 import { useThemeStore } from '@/store/theme'
+import UserBoldIcon from '@iconify-vue/solar/user-bold';
+import SunBoldIcon from '@iconify-vue/solar/sun-bold';
+import MoonBoldIcon from '@iconify-vue/solar/moon-bold';
 
 defineProps({
     isHideRight: { type: Boolean, default: false },

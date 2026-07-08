@@ -4,18 +4,19 @@ import { useUserStoreWithout } from '@/store/user'
 const userStore = useUserStoreWithout()
 
 router.beforeEach((to, from, next) => {
-    let token = localStorage.getItem('token')
-    // console.log('token', token);
-    if (token) {
-        if (to.path == '/login') next({ path: '/' })
-        else next()
-        // next()
-    } else {
-        setMenus()
+    // let token = localStorage.getItem('token')
+    // // console.log('token', token);
+    // if (token) {
+    //     if (to.path == '/login') next({ path: '/' })
+    //     else next()
+    //     // next()
+    // } else {
+    //     setMenus()
 
-        if (to.path.includes('/login')) next()
-        else next(`/login?redirect=${to.path}`)
-    }
+    //     if (to.path.includes('/login')) next()
+    //     else next(`/login?redirect=${to.path}`)
+    // }
+    next()
 })
 
 // 获取路由菜单

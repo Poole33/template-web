@@ -1,34 +1,38 @@
 {
-    "name": "template",
-    "version": "0.0.0",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
-        "lint": "eslint ."
-    },
-    "dependencies": {
-        "@unocss/reset": "^0.60.0",
-        "animate.css": "^4.1.1",
-        "ant-design-vue": "^4.2.1",
-        "axios": "^1.6.8",
-        "lodash": "^4.17.21",
-        "pinia": "^2.1.7",
-        "qs": "^6.12.1",
-        "vue": "^3.4.21",
-        "vue-router": "^4.3.0"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.20.0",
-        "@vitejs/plugin-vue": "^5.0.4",
-        "eslint": "^8.57.1",
-        "eslint-plugin-vue": "^9.32.0",
-        "globals": "^15.15.0",
-        "sass": "^1.84.0",
-        "sass-loader": "^13.3.3",
-        "unocss": "^0.59.4",
-        "vite": "^5.2.8"
-    }
+  "name": "template",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
+  },
+  "dependencies": {
+    "@iconify-vue/solar": "^1.0.4",
+    "@unocss/reset": "^0.60.0",
+    "animate.css": "^4.1.1",
+    "axios": "^1.6.8",
+    "lodash": "^4.17.21",
+    "pinia": "^2.1.7",
+    "qs": "^6.12.1",
+    "tdesign-vue-next": "^1.20.3",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.1.0",
+    "@eslint/js": "^9.20.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^9.39.4",
+    "eslint-plugin-format": "^2.0.1",
+    "eslint-plugin-vue": "^9.23.0",
+    "globals": "^15.15.0",
+    "sass": "^1.84.0",
+    "sass-loader": "^13.3.3",
+    "unocss": "^0.59.4",
+    "vite": "^5.2.8"
+  }
 }
