@@ -1,6 +1,6 @@
 import axios from 'axios'
 // import qs from 'qs'
-import { message } from 'ant-design-vue'
+import { MessagePlugin } from 'tdesign-vue-next'
 import router from '@/router'
 import { throttle } from 'lodash'
 const go_login = throttle(goLogin, 5000, { trailing: false })
@@ -72,5 +72,5 @@ function goLogin() {
 }
 
 function showErrorMsg(msg) {
-    message.error(msg)
+    MessagePlugin.error(msg)
 }

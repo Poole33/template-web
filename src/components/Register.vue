@@ -1,13 +1,13 @@
 <template>
-    <a-form
-        :model="formData"
-        name="basic"
-        :label-col="{ span: 4 }"
-        labelAlign="left"
+    <t-form
+        :data="formData"
+        label-align="left"
+        label-width="80px"
         autocomplete="off"
-        @finish="onFinish"
+        @submit="onSubmit"
+        class="pt-6"
     >
-        <a-form-item
+        <t-form-item
             label="手机号"
             name="phone"
             :rules="[
@@ -15,63 +15,73 @@
                 { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur' }
             ]"
         >
-            <a-input
+            <t-input
                 v-focus
                 autocomplete="username"
                 v-model:value="formData.phone"
                 placeholder="请输入手机号"
             />
-        </a-form-item>
+        </t-form-item>
 
-        <a-form-item
+        <t-form-item
             label="密码"
             name="pwd"
             :rules="[{ required: true, message: '请输入密码!' }]"
         >
-            <a-input-password
+            <t-input
                 v-model:value="formData.pwd"
+                type="password"
                 placeholder="请输入密码"
                 autocomplete="current-password"
             />
-        </a-form-item>
+        </t-form-item>
 
-        <a-form-item
+        <t-form-item
             label="确认密码"
             name="pwdCheck"
             :rules="[
                 { required: true, message: '请确认密码!' },
-                { validator: checkPwd, tirgger: 'change' }
+                { validator: checkPwd, trigger: 'change' }
             ]"
         >
-            <a-input-password
+            <t-input
                 v-model:value="formData.pwdCheck"
+                type="password"
                 placeholder="请输入密码"
                 autocomplete="current-password"
             />
-        </a-form-item>
+        </t-form-item>
 
-        <a-form-item>
-            <a-button class="h-12 w-full text-base" type="primary" html-type="submit">注册</a-button>
-        </a-form-item>
-    </a-form>
+        <t-form-item>
+            <t-button class="submit-btn" theme="primary" type="submit">注册</t-button>
+        </t-form-item>
+    </t-form>
 </template>
 
 <script setup>
+import { MessagePlugin } from 'tdesign-vue-next'
 import { ref } from 'vue'
-import { register, captcha } from '@/api/module/login.js'
-import { message } from 'ant-design-vue'
-import router from '@/router';
+import router from '@/router'
+import { captcha, register } from '@/api/module/login.js'
 // let emit = defineEmits(['success'])
 
-let formData = ref({})
+const formData = ref({
+    phone: '',
+    pwd: '',
+    pwdCheck: '',
+})
 
 
-function checkPwd(rule, value, callback) {
-    if (value != formData.value.pwd) callback('两次密码不一致，请检查')
-    callback()
+function checkPwd(value) {
+    if (value != formData.value.pwd) {
+        return { result: false, message: '两次密码不一致，请检查', type: 'error' }
+    }
+    return true
 }
 
-async function onFinish() {
+async function onSubmit({ validateResult }) {
+    if (validateResult !== true) return
+
     // 设置图形验证码
     const checkCode = await captcha()
     if (checkCode.code != 200) return
@@ -80,7 +90,7 @@ async function onFinish() {
     const res = await register(formData.value)
     if (res.code != 200) return
 
-    message.success('注册成功')
+    MessagePlugin.success('注册成功')
     localStorage.setItem('phone', res.data.phone)
     localStorage.setItem('token', res.data.token)
     router.push('/')
@@ -89,5 +99,13 @@ async function onFinish() {
 </script>
 
 <style lang="scss" scoped>
-
+.submit-btn {
+    width: 100%;
+    height: 44px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    background: var(--theme-primary);
+}
 </style>

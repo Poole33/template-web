@@ -1,4 +1,4 @@
-:root {
+:root, .light {
   --theme-color: #000;
   --theme-background: #fff;
   --theme-bgSecondary: #f8f8f8;
@@ -8,6 +8,7 @@
   --theme-head: #ce1f00;
   --theme-primary: #e11b22;
   --transition-smooth: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --td-brand-color: #e11b22;
 }
 
 .dark {
@@ -17,13 +18,4 @@
     --theme-bgTertiary: #181818;
     --theme-head: #000;
     --theme-primary: #c21a20;
-}
-
-.light {
-  --theme-color: #000;
-  --theme-background: #fff;
-  --theme-bgSecondary: #f8f8f8;
-  --theme-bgTertiary: #e9e9e9;
-  --theme-head: #ce1f00;
-  --theme-primary: #e11b22;
 }

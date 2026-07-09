@@ -124,7 +124,7 @@ function jumpTo(path) {
 
 .collapsed-btn {
   position: absolute;
-  inset-block-start: 18px;
+  inset-block-start: 38%;
   z-index: 101;
   width: 24px;
   height: 24px;
