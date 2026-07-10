@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,6 +14,11 @@ export default defineConfig({
         vue(),
         UnoCSS({
             configFile: './uno.config.js'
+        }),
+        AutoImport({
+          imports: ['vue', 'uni-app'],
+          dirs: ['src/hooks'], // 自动导入 hooks
+          vueTemplate: true, // default false
         }),
     ],
     resolve: {

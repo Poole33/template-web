@@ -58,7 +58,6 @@
 
 <script setup>
 import { MessagePlugin } from 'tdesign-vue-next'
-import { ref } from 'vue'
 import { login } from '@/api/module/login.js'
 import { useRouter, useRoute } from 'vue-router'
 import Register from '@/components/Register.vue'
