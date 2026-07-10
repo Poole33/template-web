@@ -14,7 +14,14 @@ export default antfu({
     css: true,
     html: true,
   },
-
+  ignores: [
+    '**/dist',
+    '**/.output',
+    '**/.nuxt',
+    '**/unpackage', // uni-app 的打包目录
+    'node_modules',
+    'dist',
+  ],
   rules: {
     // 允许无用的return语句
     'no-useless-return': 'off',
@@ -38,10 +45,12 @@ export default antfu({
     'no-extend-native': 'off',
     // 允许使用 ==
     'eqeqeq': 'on',
+    'vue/eqeqeq': 'off',
     // vue SFC 调换顺序改这里
     'vue/block-order': ['error', {
       order: [['script', 'template'], 'style'],
     }],
     'style/max-statements-per-line': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
   },
 })
