@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <Head></Head>
+    <div class="h-full flex flex-col overflow-hidden">
+        <Head class="shrink-0"></Head>
         
-        <div class="content-box">
+        <div class="flex-1 flex h-full">
             <Aside></Aside>
-            <div class="grow">
+            <div class="h-full flex-1 overflow-auto">
                 <RouterView />
             </div>
         </div>
@@ -21,9 +21,5 @@ console.log('router', useRoute())
 </script>
 
 <style lang="scss" scoped>
-.content-box {
-    height: calc(100vh - 64px);
-    overflow-y: auto;
-    display: flex;
-}
+
 </style>
