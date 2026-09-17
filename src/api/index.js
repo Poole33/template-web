@@ -1,76 +1,80 @@
 import axios from 'axios'
+import { throttle } from 'lodash'
 // import qs from 'qs'
 import { MessagePlugin } from 'tdesign-vue-next'
 import router from '@/router'
-import { throttle } from 'lodash'
+
 const go_login = throttle(goLogin, 5000, { trailing: false })
 const show_error_msg = throttle(showErrorMsg, 5000, { trailing: false })
 
 const service = axios.create({
-    timeout: 5000,
-    baseURL: import.meta.env.VITE_APP_BASE_API
+  timeout: 5000,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
 })
 
 // 请求拦截
-service.interceptors.request.use(res => {
-    // if (res.method == 'post') res.data = qs.stringify(res.data);
-    res.headers.Authorization = localStorage.getItem('token')
-    return res
+service.interceptors.request.use((res) => {
+  // if (res.method == 'post') res.data = qs.stringify(res.data);
+  res.headers.Authorization = localStorage.getItem('token')
+  return res
 })
 
 // 响应拦截
-service.interceptors.response.use(res => {
-    // console.log('code', res.data.code);
-    if (res.data.code == 200) return res.data
-    else {
-        show_error_msg(res.data.msg)
-        if (res.data.code == 404) router.replace({ path: '/404' })
-        else if (res.data.code == 401) {
-            go_login()
-            localStorage.removeItem('token')
-            
-        }
-        return res.data
+service.interceptors.response.use((res) => {
+  // console.log('code', res.data.code);
+  if (res.data.code == 200) {
+    return res.data
+  }
+  else {
+    show_error_msg(res.data.msg)
+    if (res.data.code == 404) {
+      router.replace({ path: '/404' })
     }
-}, error => {
-    console.log(error)
-    const isTimeout = error.code === 'ECONNABORTED' && error.message.includes('timeout')
+    else if (res.data.code == 401) {
+      go_login()
+      localStorage.removeItem('token')
+    }
+    return res.data
+  }
+}, (error) => {
+  console.log(error)
+  const isTimeout = error.code == 'ECONNABORTED' && error.message.includes('timeout')
 
-    if (isTimeout) {
-      show_error_msg('请求超时，请检查网络后重试')
-      return error
-    }
+  if (isTimeout) {
+    show_error_msg('请求超时，请检查网络后重试')
+    return error
+  }
 })
 
 export default {
-    get: (url, params) => {
-        return service.get(url, { params })
-    },
-    post: (url, data) => {
-        return service.post(url, data, {
-            headers: { 'Content-Type': 'application/json' }
-        })
-    },
-    upload: (url, data) => {
-        const formData = new FormData()
-        Object.keys(data).forEach((key) => {
-            formData.append(key, data[key])
-        })
-        return service.post(url, formData, { header: { 'Content-Type': 'multipart/form-data' } })
-    },
-    put: () => {},
+  get: (url, params) => {
+    return service.get(url, { params })
+  },
+  post: (url, data) => {
+    return service.post(url, data, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+  },
+  upload: (url, data) => {
+    const formData = new FormData()
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key])
+    })
+    return service.post(url, formData, { header: { 'Content-Type': 'multipart/form-data' } })
+  },
+  put: () => {},
 }
 
 function goLogin() {
-    // console.log('goLogin');
-    router.push({
-        path: '/login',
-        query: {
-            redirect: location.pathname + location.search
-        }
-    })
+  // console.log('goLogin');
+  router.push({
+    path: '/login',
+    query: {
+      redirect: location.pathname + location.search,
+    },
+  })
 }
 
 function showErrorMsg(msg) {
-    MessagePlugin.error(msg)
+  MessagePlugin.error(msg)
 }

@@ -44,7 +44,7 @@ export default antfu({
     // 允许扩展原生对象原型
     'no-extend-native': 'off',
     // 允许使用 ==
-    'eqeqeq': 'on',
+    'eqeqeq': 'off',
     'vue/eqeqeq': 'off',
     // vue SFC 调换顺序改这里
     'vue/block-order': ['error', {
