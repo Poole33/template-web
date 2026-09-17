@@ -1,5 +1,5 @@
-import vFocus from "./vFocus";
+import vFocus from './vFocus'
 
 export default function setupDirectives(app) {
-    app.directive('focus', vFocus)
+  app.directive('focus', vFocus)
 }

@@ -19,30 +19,30 @@
             <component :is="item.icon" class="h-1em pr-2" />
           </template>
           {{ item.name }}
-          </t-menu-item>
-          <t-submenu
-            v-else-if="item.children && item.children.length > 1"
-            :key="item.path"
-            :title="item.name"
-            :value="item.path"
-            @click="titleClick(item.path)"
+        </t-menu-item>
+        <t-submenu
+          v-else-if="item.children && item.children.length > 1"
+          :key="item.path"
+          :title="item.name"
+          :value="item.path"
+          @click="titleClick(item.path)"
+        >
+          <template #icon>
+            <component :is="item.icon" class="h-1em pr-2" />
+          </template>
+          <t-menu-item
+            v-for="route in item.children"
+            :key="`${item.path}/${route.path}`"
+            :title="route.meta.name"
+            :value="`${item.path}/${route.path}`"
+            @click="jumpTo(`${item.path}/${route.path}`)"
           >
             <template #icon>
-              <component :is="item.icon" class="h-1em pr-2" />
+              <component :is="route.icon" class="h-1em pr-2" />
             </template>
-            <t-menu-item
-              v-for="route in item.children"
-              :key="`${item.path}/${route.path}`"
-              :title="route.meta.name"
-              :value="`${item.path}/${route.path}`"
-              @click="jumpTo(`${item.path}/${route.path}`)"
-            >
-              <template #icon>
-                <component :is="route.icon" class="h-1em pr-2" />
-              </template>
-              {{ route.meta.name }}
-            </t-menu-item>
-          </t-submenu>
+            {{ route.meta.name }}
+          </t-menu-item>
+        </t-submenu>
       </template>
     </t-menu>
 
@@ -62,9 +62,9 @@ import { constRoutes } from '@/router/index.js'
 
 const router = useRouter()
 const route = useRoute()
-let openKeys = ref([localStorage.getItem('menu-openkey')]) // 展开哪个tab
-let selectedKey = ref(route.path) // 选中哪个item
-let collapsed = ref(false) // 折叠aside
+const openKeys = ref([localStorage.getItem('menu-openkey')]) // 展开哪个tab
+const selectedKey = ref(route.path) // 选中哪个item
+const collapsed = ref(false) // 折叠aside
 
 watch(() => route.path, (newPath, oldPath) => {
   // console.log(`从 ${oldPath} 变到了 ${newPath}`)
@@ -104,7 +104,7 @@ onUnmounted(() => {
 function jumpTo(path) {
   router.push(path)
 }
- </script>
+</script>
 
 <style lang="scss" scoped>
 .aside {
